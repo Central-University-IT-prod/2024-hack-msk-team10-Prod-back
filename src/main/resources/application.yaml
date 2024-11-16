@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.postgresql.Driver
+    username: sa
+    password: 12345678
+  jpa:
+    hibernate:
+      ddl-auto: update

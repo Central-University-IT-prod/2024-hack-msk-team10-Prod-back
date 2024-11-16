@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL={{sensitive_data}}
+      - SPRING_DATASOURCE_USERNAME={{sensitive_data}}
+      - SPRING_DATASOURCE_PASSWORD={{sensitive_data}}
+    depends_on:
+      - db
+    networks:
+      - my-network
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: {{sensitive_data}}
+      POSTGRES_PASSWORD: {{sensitive_data}}
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+networks:
+  my-network:
+
+volumes:
+  db_data:
